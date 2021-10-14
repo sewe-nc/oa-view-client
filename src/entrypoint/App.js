@@ -11,8 +11,13 @@ import PackageInfoScreen from "../screens/PackageInfoScreen";
 import LogScreen from "../screens/LogScreen";
 import CityBlacklistScreen from "../screens/CityBlacklistScreen";
 import ContactScreen from "../screens/ContactScreen";
+import { useDispatch } from "react-redux";
+import { fetchLog } from "../redux/slices/searchSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  dispatch(fetchLog());
+
   return (
     <Router>
       <div>

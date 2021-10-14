@@ -29,6 +29,8 @@ export const queryRoute = createAsyncThunk(
       ToId: "destinationCityId",
       PackageSize: 13,
       PackageWeight: 4,
+      Duration: 123,
+      Price: 180,
       GoThroughLocations: [
         {
           Id: "string",
@@ -67,6 +69,115 @@ export const queryRoute = createAsyncThunk(
   }
 );
 
+export const fetchLog = createAsyncThunk(
+  "search/fetchLog",
+  async (args, thunkAPI) => {
+    const response = [
+      {
+        Id: "string",
+        From: {
+          Id: "string",
+          Name: "string",
+          IsBlacklisted: true,
+          Comment: "string",
+        },
+        FromId: "string",
+        To: {
+          Id: "string",
+          Name: "string",
+          IsBlacklisted: true,
+          Comment: "string",
+        },
+        ToId: "string",
+        PackageSize: 3,
+        PackageWeight: 1,
+        Duration: 16,
+        Price: 30,
+        GoThroughLocations: [
+          {
+            Id: "string",
+            Name: "string1",
+            IsBlacklisted: true,
+            Comment: "string",
+          },
+          {
+            Id: "string",
+            Name: "string2",
+            IsBlacklisted: true,
+            Comment: "string",
+          },
+          {
+            Id: "string",
+            Name: "string3",
+            IsBlacklisted: true,
+            Comment: "string",
+          },
+        ],
+      },
+      {
+        Id: "string",
+        From: {
+          Id: "string",
+          Name: "string",
+          IsBlacklisted: true,
+          Comment: "string",
+        },
+        FromId: "string",
+        To: {
+          Id: "string",
+          Name: "string",
+          IsBlacklisted: true,
+          Comment: "string",
+        },
+        ToId: "string",
+        PackageSize: 18,
+        PackageWeight: 2,
+        Duration: 68,
+        Price: 280,
+        GoThroughLocations: [
+          {
+            Id: "string",
+            Name: "string",
+            IsBlacklisted: true,
+            Comment: "string",
+          },
+        ],
+      },
+      {
+        Id: "string",
+        From: {
+          Id: "string",
+          Name: "string",
+          IsBlacklisted: true,
+          Comment: "string",
+        },
+        FromId: "string",
+        To: {
+          Id: "string",
+          Name: "string",
+          IsBlacklisted: true,
+          Comment: "string",
+        },
+        ToId: "string",
+        PackageSize: 1,
+        PackageWeight: 29,
+        Duration: 17,
+        Price: 90,
+        GoThroughLocations: [
+          {
+            Id: "string",
+            Name: "string",
+            IsBlacklisted: true,
+            Comment: "string",
+          },
+        ],
+      },
+    ];
+
+    return response;
+  }
+);
+
 export const saveResultToLog = createAsyncThunk(
   "search/saveLog",
   async (args, thunkAPI) => {
@@ -80,6 +191,7 @@ export const saveResultToLog = createAsyncThunk(
 const initialState = {
   result: undefined,
   status: status.IDLE,
+  log: [],
 };
 
 const searchSlice = createSlice({
@@ -99,6 +211,9 @@ const searchSlice = createSlice({
     builder.addCase(queryRoute.fulfilled, (state, action) => {
       state.result = action.payload;
       state.status = status.FULFILLED;
+    });
+    builder.addCase(fetchLog.fulfilled, (state, action) => {
+      state.log = action.payload;
     });
   },
 });
